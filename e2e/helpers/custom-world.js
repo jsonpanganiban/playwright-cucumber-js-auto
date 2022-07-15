@@ -1,13 +1,9 @@
-import { setWorldConstructor, World } from '@cucumber/cucumber';
+import { World, setWorldConstructor } from '@cucumber/cucumber';
 
 export class CustomWorld extends World {
-  count = 0;
-
   constructor(options) {
     super(options);
-  }
-
-  eat(count) {
-    this.count += count;
+    this.debug = false;
   }
 }
+setWorldConstructor(CustomWorld);
