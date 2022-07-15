@@ -1,0 +1,43 @@
+{
+  "name": "playwright-cucumber-auto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js",
+    "regressive": "npx cucumber-js --tags \"@regressive\"",
+    "parallel": "cucumber-js --parallel=2",
+    "cucumber-check": "cucumber-js features/**/*.feature --dry-run --require env/set-environment-variables.ts --require world/custom-world.ts --require step-definitions/**/*.ts --require hooks/**/*.ts  --require-module ts-node/register --format-options \"{\\\"snippetInterface\\\": \\\"async-await\\\"}\" --format summary --format progress --format progress-bar  --publish-quiet",
+    "snippets": "cucumber-js features/**/*.feature --dry-run --format snippets"
+  },
+  "keywords": [],
+  "author": "Jayson Panganiban",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "2.7.1",
+    "@cucumber/html-formatter": "^19.2.0",
+    "@cucumber/messages": "^19.0.0",
+    "@cucumber/pretty-formatter": "^1.0.0",
+    "cucumber-console-formatter": "^1.0.0",
+    "cucumber-html-reporter": "^5.5.0",
+    "fs-extra": "^10.1.0",
+    "open": "^8.4.0",
+    "path": "^0.12.7",
+    "pixelmatch": "^5.3.0",
+    "pngjs": "^6.0.0",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "eslint-config-prettier": "^8.5.0",
+    "@cucumber/cucumber": "^8.3.1",
+    "@playwright/test": "^1.23.1",
+    "chai": "^4.3.6",
+    "cucumber-expressions": "^8.3.0",
+    "faker-br": "^0.4.1",
+    "rimraf": "^3.0.2"
+  }
+}
