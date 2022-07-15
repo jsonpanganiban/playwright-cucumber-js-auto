@@ -2,12 +2,12 @@
 // eslint-disable-next-line object-curly-newline
 import { Before, After, BeforeAll, setDefaultTimeout, AfterAll } from '@cucumber/cucumber';
 import { chromium, webkit, firefox } from '@playwright/test';
+import { ensureDir } from 'fs-extra';
 import { removeFiles } from '../helpers/file-manager';
 import { config } from './config';
 
-setDefaultTimeout(process.env.PWDEBUG ? -1 : 60 * 1000);
-
 const VIDEO = true;
+const tracesDir = 'traces';
 
 const options = {
   args: ['--start-maximized'],
@@ -15,9 +15,12 @@ const options = {
   recordVideo: VIDEO ? { dir: 'reports/videos' } : undefined,
 };
 
+setDefaultTimeout(process.env.PWDEBUG ? -1 : config.defaultTimeout);
+
 BeforeAll(async () => {
   await removeFiles('reports/videos/*.webm');
   await removeFiles('reports/images/*.png');
+
   switch (config.browser) {
     case 'webkit':
       global.browser = await webkit.launch(config.browserOptions);
@@ -29,13 +32,14 @@ BeforeAll(async () => {
       global.browser = await chromium.launch(config.browserOptions);
       break;
   }
+  await ensureDir(tracesDir);
 });
 
 Before(async ({ pickle }) => {
   global.testName = pickle.name.replace(/\W/g, '-');
   global.context = await global.browser.newContext(options);
   global.page = await global.context.newPage();
-  await page.goto(global.BASE_URL);
+  // await page.goto(global.BASE_URL);
 });
 
 After(async () => {
