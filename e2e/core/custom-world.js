@@ -2,8 +2,9 @@
 import { setWorldConstructor, World } from '@cucumber/cucumber';
 
 export class CustomWorld extends World {
-  // eslint-disable-next-line no-useless-constructor
   constructor(options) {
     super(options);
+    this.debug = false;
   }
 }
+setWorldConstructor(CustomWorld);
