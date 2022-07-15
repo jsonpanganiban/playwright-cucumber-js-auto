@@ -7,6 +7,7 @@ This project is a basic framework to write E2E tests with Cucumber-JS and Playwr
 # Install
 
 `npm install`
+
 `npx playwright install`
 
 # Run the tests
